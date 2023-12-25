@@ -1,23 +1,26 @@
-import React from 'react'
-
+import { useContext, useRef } from "react"
+import { PostList } from "../store/post-list-store"
 const CreatePost = () => {
+    const { addPost } = useContext(PostList)
+    const id = useRef()
+    const message = useRef()
+    console.log(message)
     return (
-        <div><form>
+        <div className='ms-5'>
             <div className="mb-3">
-                <label htmlFor="exampleInputEmail1" className="form-label">Email address</label>
-                <input type="email" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" />
-                <div id="emailHelp" className="form-text">We'll never share your email with anyone else.</div>
+                <label htmlFor="exampleInputEmail1" className="form-label">id</label>
+                <input type="number" className="form-control"
+                    ref={id}
+                />
             </div>
             <div className="mb-3">
-                <label htmlFor="exampleInputPassword1" className="form-label">Password</label>
-                <input type="password" className="form-control" id="exampleInputPassword1" />
+                <label htmlFor="exampleInputPassword1" className="form-label">message</label>
+                <input type="text" className="form-control" ref={message} />
             </div>
-            <div className="mb-3 form-check">
-                <input type="checkbox" className="form-check-input" id="exampleCheck1" />
-                <label className="form-check-label" htmlFor="exampleCheck1">Check me out</label>
-            </div>
-            <button type="submit" className="btn btn-primary">Submit</button>
-        </form></div>
+            <button className="btn btn-primary"
+                onClick={() => addPost({ id: id.current.value, message: message.current.value })}
+            >Submit</button>
+        </div>
     )
 }
 
